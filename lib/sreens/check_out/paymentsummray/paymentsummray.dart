@@ -2,8 +2,8 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../providers/reviewcart_providers.dart';
+import '../../Widget/app_scaffold.dart';
 import '../../models/delivery_address_model.dart';
 import '../delivery_details/single_delivery.dart';
 import 'Order_item.dart';
@@ -41,23 +41,24 @@ class _PaymentSummaryState extends State<PaymentSummary> {
     double newtotalPrice;
 
     if (totalPrice > 300) {
-      discounValue = (totalPrice * (discount/100));
-      newtotalPrice =  totalPrice - discounValue+shipingValue;
+      discounValue = (totalPrice * (discount / 100));
+      newtotalPrice = totalPrice - discounValue + shipingValue;
 
       newtotalPrice;
-    }
-    else{
-       newtotalPrice = reviewCartProvider.getTotalPrice()+shipingValue;
-       discounValue = 0;
+    } else {
+      newtotalPrice = reviewCartProvider.getTotalPrice() + shipingValue;
+      discounValue = 0;
     }
 
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: (){
-        Navigator.pop(context);
-      },
-      icon: Icon(Icons.arrow_back),
-      color: Colors.black,),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back),
+            color: Colors.black,
+          ),
           elevation: 0,
           title: Text(
             'PaymentSummary',
@@ -86,17 +87,16 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                 myType == AddressTypes.OnlinePayment
                     ? Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                        return MyGooglePay(
+                        return AppScaffold(
+                            child: MyGooglePay(
                           total: total,
-                        );
+                        ));
                       }))
                     : Container();
               },
               child: Text(
                 'please Oreder',
-                style: TextStyle(
-                
-              ),
+                style: TextStyle(),
               ),
               color: Color.fromARGB(255, 237, 204, 71),
               elevation: 0,

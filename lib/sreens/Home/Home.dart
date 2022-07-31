@@ -6,6 +6,7 @@ import 'package:uuyuyuy/sreens/reviewcart/reviewcart.dart';
 
 import '../../providers/product_providers.dart';
 import '../../providers/user_providers.dart';
+import '../Widget/app_scaffold.dart';
 import '../product_overview/product_overview.dart';
 import '../search/search.dart';
 import 'Drawer.dart';
@@ -39,9 +40,10 @@ class _HomeState extends State<Home> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => Search(
+                  builder: (context) => 
+                  AppScaffold(child: Search(
                     search: productProvider.getHerbsProductDataList,
-                  ),
+                  ),),
                 ),
               );
             },
@@ -75,9 +77,10 @@ class _HomeState extends State<Home> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => Search(
+                  builder: (context) => 
+                  AppScaffold(child: Search(
                     search: productProvider.getHerbsProductDataList,
-                  ),
+                  ),),
                 ),
               );
             },
@@ -111,9 +114,10 @@ class _HomeState extends State<Home> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => Search(
+                  builder: (context) => 
+                  AppScaffold(child: Search(
                     search: productProvider.getHerbsProductDataList,
-                  ),
+                  ),),
                 ),
               );
             },
@@ -166,8 +170,9 @@ class _HomeState extends State<Home> {
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) => Search(
+                    builder: ((context) => AppScaffold(child: Search(
                           search: productProvider.getAllProductSearch,
+                        )
                         ))));
               },
               icon: Icon(
@@ -185,7 +190,8 @@ class _HomeState extends State<Home> {
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) => ReviewCart() )));
+                    builder: ((context) => 
+                    AppScaffold(child:ReviewCart()) )));
               },
               icon: Icon(
                 Icons.shop,
@@ -264,13 +270,14 @@ class _HomeState extends State<Home> {
                   return InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => ProductOverview(
+                          builder: ((context) => 
+                              AppScaffold(child: ProductOverview(
                             ProductUnit: herbsProductData.productUnit,
                                 productId: herbsProductData.productId,
                                 productImage: herbsProductData.productImage,
                                 productName: herbsProductData.productName,
                                 productPrice: herbsProductData.productPrice,
-                              ))));
+                              )))));
                     },
                     child: SingleProduct(
                       productUnit: herbsProductData,
@@ -294,13 +301,14 @@ class _HomeState extends State<Home> {
                   return InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => ProductOverview(
+                          builder: ((context) => 
+                              AppScaffold(child: ProductOverview(
                                ProductUnit: freshProductData.productUnit,
                                 productImage: freshProductData.productImage,
                                 productName: freshProductData.productName,
                                 productPrice: freshProductData.productPrice,
                                 productId: freshProductData.productId,
-                              ))));
+                              )))));
                     },
                     child: SingleProduct(
                       productUnit:freshProductData,
@@ -324,13 +332,14 @@ class _HomeState extends State<Home> {
                   return InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => ProductOverview(
+                          builder: ((context) =>
+                              AppScaffold(child:  ProductOverview(
                             ProductUnit: rootProductData.productUnit,
                                 productId: rootProductData.productId,
                                 productImage: rootProductData.productImage,
                                 productName: rootProductData.productName,
                                 productPrice: rootProductData.productPrice,
-                              ))));
+                              )))));
                     },
                     child: SingleProduct(
                       productUnit:rootProductData,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_providers.dart';
 import '../My_profile/My_profile.dart';
+import '../Widget/app_scaffold.dart';
 import '../WishList/WishList.dart';
 import '../reviewcart/reviewcart.dart';
 import 'Home.dart';
@@ -108,7 +109,7 @@ class _DrawerSideState extends State<DrawerSide> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => AppScaffold(child: Home()),
                       ),
                     );
                   },
@@ -119,7 +120,7 @@ class _DrawerSideState extends State<DrawerSide> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ReviewCart(),
+                        builder: (context) => AppScaffold(child:ReviewCart()),
                       ),
                     );
                   },
@@ -130,9 +131,7 @@ class _DrawerSideState extends State<DrawerSide> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => MyProfile(
-                            // userProvider:widget.userProvider
-                            ),
+                        builder: (context) =>AppScaffold(child:  MyProfile()),
                       ),
                     );
                   },
@@ -143,27 +142,21 @@ class _DrawerSideState extends State<DrawerSide> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => WishList(),
+                          builder: (context) => AppScaffold(child: WishList()),
                         ),
                       );
                     }),
                 listTile(
                     iconData: Icons.star_outline,
                     title: "Rating & Review",
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WishList(),
-                        ),
-                      );
-                    }),
+                    onTap: () {}),
                 listTile(
                     iconData: Icons.favorite_outline,
                     title: "Wishlist",
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => WishList(),
+                          builder: (context) => AppScaffold(child: WishList()),
                         ),
                       );
                     }),
@@ -173,20 +166,14 @@ class _DrawerSideState extends State<DrawerSide> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => WishList(),
+                          builder: (context) => AppScaffold(child: WishList()),
                         ),
                       );
                     }),
                 listTile(
                     iconData: Icons.format_quote_outlined,
                     title: "FAQs",
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WishList(),
-                        ),
-                      );
-                    }),
+                    onTap: () {}),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 70),
                       child: Divider(),

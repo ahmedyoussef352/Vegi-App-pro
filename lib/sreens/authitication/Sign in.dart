@@ -8,9 +8,11 @@ import 'package:provider/provider.dart';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:uuyuyuy/sreens/Home/splashscreen.dart';
 
 import '../../providers/user_providers.dart';
 import '../Home/Home.dart';
+import '../Widget/app_scaffold.dart';
 
 class SignIn extends StatefulWidget {
   // const SignIn({Key? key}) : super(key: key);
@@ -162,7 +164,7 @@ class _SignInState extends State<SignIn> {
                     await signInWithApple().then(
                       (value) => Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => Home(),
+                          builder: (context) => AppScaffold(child: Splash()),
                         ),
                       ),
                     );
@@ -197,7 +199,7 @@ class _SignInState extends State<SignIn> {
                     await _googleSignUp().then(
                       (value) => Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => Home(),
+                          builder: (context) => AppScaffold(child: Splash()),
                         ),
                       ),
                     );

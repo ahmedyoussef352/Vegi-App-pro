@@ -26,34 +26,9 @@ class UserProvider with ChangeNotifier {
   }
 
    List<UserModel> currentData = [];
-
-  void getUserData() async {
-     List<UserModel> newList = [];
-    var value = await FirebaseFirestore.instance
-        .collection("usersData")
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .get();
-    if (value.exists) {
-    UserModel  userModel = UserModel(
-        userEmail: value.get("userEmail"),
-        userImage: value.get("userImage"),
-        userName: value.get("userName"),
-        userUid: value.get("userUid"),
-      );
-      newList.add(userModel);
-      
-    }
-   currentData = newList;
-    
-      notifyListeners();
-  }
-  List <UserModel> get currentUserData {
-    return currentData;
-  }
 }
 
-
-
+ 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/foundation.dart';

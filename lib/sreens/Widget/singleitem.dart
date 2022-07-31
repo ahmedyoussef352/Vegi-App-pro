@@ -22,7 +22,7 @@ class SingleItem extends StatefulWidget {
       this.onDelete,
       this.productId,
       this.productQuantity,
-       this.isBool,
+      this.isBool,
       required this.productImage,
       required this.productName,
       required this.productPrice});
@@ -160,7 +160,7 @@ class _SingleItemState extends State<SingleItem> {
                     child: widget.isBool == false
                         ? Count(
                             // productQuantity: widget.productQuantity,
-                             productUnit: widget.productUnit,
+                            productUnit: widget.productUnit,
                             productId: widget.productId!,
                             productImage: widget.productImage,
                             productName: widget.productName,
@@ -208,7 +208,8 @@ class _SingleItemState extends State<SingleItem> {
                                                     });
                                                     reviewCartProvider
                                                         .updateReviewCartData(
-                                                  cartUnit: widget.productUnit,
+                                                      cartUnit:
+                                                          widget.productUnit,
                                                       cartImage:
                                                           widget.productImage,
                                                       cartId: widget.productId,
@@ -242,7 +243,8 @@ class _SingleItemState extends State<SingleItem> {
                                                     });
                                                     reviewCartProvider
                                                         .updateReviewCartData(
-                                                  cartUnit: widget.productUnit,
+                                                      cartUnit:
+                                                          widget.productUnit,
                                                       cartImage:
                                                           widget.productImage,
                                                       cartId: widget.productId,
@@ -266,10 +268,9 @@ class _SingleItemState extends State<SingleItem> {
                                         ),
                                       )
                                     : Container(
-                                     //
-                                        
+                                        //
 
-                                    ),
+                                        ),
                               ],
                             ),
                           ),

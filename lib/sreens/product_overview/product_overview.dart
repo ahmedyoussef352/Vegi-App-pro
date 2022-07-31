@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/wish_List_provider.dart';
+import '../Widget/app_scaffold.dart';
 import '../Widget/count.dart';
 import '../reviewcart/reviewcart.dart';
 
@@ -11,14 +12,13 @@ class ProductOverview extends StatefulWidget {
   final String productName;
   final int productPrice;
   final String productId;
-   var ProductUnit;
+  var ProductUnit;
   // ignore: non_constant_identifier_names
   final int? ProductQuatity;
   // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
   ProductOverview(
-
       {required this.ProductUnit,
-        required this.productImage,
+      required this.productImage,
       required this.productName,
       required this.productPrice,
       required this.productId,
@@ -107,8 +107,8 @@ class _ProductOverviewState extends State<ProductOverview> {
         title: Text(
           'Product Overview',
           style: TextStyle(
-                color: Colors.black,
-              ),
+            color: Colors.black,
+          ),
         ),
         iconTheme: IconThemeData(),
       ),
@@ -117,16 +117,16 @@ class _ProductOverviewState extends State<ProductOverview> {
           bonntonNavigator(
             onTap: () {
               setState(() {
-                WishListBool =! WishListBool;
+                WishListBool = !WishListBool;
               });
               if (WishListBool == true) {
                 wishListProvider.addWishListData(
                   wishListUnit: widget.ProductUnit,
-                 wishListId: widget.productId,
-                    wishListImage: widget.productImage,
-                    wishListName: widget.productName,
-                    wishListPrice: widget.productPrice,
-                    wishListQuantity: 2,
+                  wishListId: widget.productId,
+                  wishListImage: widget.productImage,
+                  wishListName: widget.productName,
+                  wishListPrice: widget.productPrice,
+                  wishListQuantity: 2,
                 );
               } else {
                 wishListProvider.deleteWishtList(widget.productId);
@@ -142,8 +142,9 @@ class _ProductOverviewState extends State<ProductOverview> {
           bonntonNavigator(
               onTap: () {
                 setState(() {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ReviewCart()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AppScaffold(child: ReviewCart()),
+                  ));
                 });
               },
               backgroundColor: Color.fromARGB(255, 237, 204, 71),
@@ -242,23 +243,6 @@ class _ProductOverviewState extends State<ProductOverview> {
                           productPrice: widget.productPrice,
                           // productQuantity: widget.productQuantity
                         ),
-                        // Container(
-                        //   height: 40,
-                        //   width: 110,
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.circular(20),
-                        //     border: Border.all(color: Colors.yellow),
-                        //   ),
-                        //   child: Center(
-                        //     child: Text(
-                        //       '+ ADD',
-                        //       style: TextStyle(
-                        //         fontSize: 18,
-                        //         color: Colors.yellow,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // )
                       ],
                     ),
                   ),
