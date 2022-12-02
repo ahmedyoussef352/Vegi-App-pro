@@ -20,7 +20,7 @@ class _CostumGoogleMapState extends State<CostumGoogleMap> {
       controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-              target: LatLng(event.latitude, event.longitude!), zoom: 15),
+              target: LatLng(event.latitude!, event.longitude), zoom: 15),
         ),
       );
     });

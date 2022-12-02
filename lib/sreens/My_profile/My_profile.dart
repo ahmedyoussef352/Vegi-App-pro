@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuyuyuy/sreens/welcome/welcome.dart';
 import '../../providers/user_providers.dart';
 import '../Home/Drawer.dart';
 import '../Widget/app_scaffold.dart';
@@ -177,7 +178,7 @@ class _MyProfileState extends State<MyProfile> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        AppScaffold(child: SignIn()),
+                                        AppScaffold(child: Welcome()),
                                   ),
                                 );
                               })

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,7 @@ class SingleItem extends StatefulWidget {
   Function? onDelete;
   bool? wishList = false;
   var productUnit;
+  bool?search;
 
   SingleItem(
       {required this.productUnit,
@@ -25,7 +28,8 @@ class SingleItem extends StatefulWidget {
       this.isBool,
       required this.productImage,
       required this.productName,
-      required this.productPrice});
+      required this.productPrice,
+      this.search});
 
   @override
   State<SingleItem> createState() => _SingleItemState();
@@ -53,9 +57,15 @@ class _SingleItemState extends State<SingleItem> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.network(
-                  widget.productImage,
-                  width: 100,
+                Expanded(
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    child: Image.network(
+                      widget.productImage,
+                      width: 120,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 30,
@@ -68,14 +78,37 @@ class _SingleItemState extends State<SingleItem> {
                         : MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      widget.search==true? Text(
                         widget.productName,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                        ),
+                      ):
+                      widget.search==true?Text(
+                        widget.productName,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ):Text(
+                        widget.productName,
+                        maxLines: 1,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                         ),
                       ),
+                      widget.search==true?
                       Text(
+                        '${widget.productPrice}\$',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 17,
+                        ),
+                      ):Text(
                         '${widget.productPrice}\$',
                         style: TextStyle(
                           color: Colors.grey,
@@ -147,11 +180,21 @@ class _SingleItemState extends State<SingleItem> {
                                 ),
                               ),
                             )
-                          : Text('500 Gram'),
+                          : 
+                          Text('${widget.productQuantity.toString()}x Quantity ',style: TextStyle(
+                            color: Color.fromARGB(255, 234, 30, 15),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600
+                          ),),
                     ],
                   ),
                 ),
-                Expanded(
+                widget.search==true ?Expanded(child: Container(
+                  height: 100,
+                  width: 100,
+                ))
+
+                :Expanded(
                   child: Container(
                     height: 90,
                     padding: widget.isBool == false
@@ -170,16 +213,19 @@ class _SingleItemState extends State<SingleItem> {
                             padding: const EdgeInsets.only(top: 8),
                             child: Column(
                               children: [
-                                InkWell(
+                                widget.search==true?Container()
+
+                                :InkWell(
                                   onTap: () {
                                     setState(widget.onDelete!());
                                   },
                                   child: Icon(
                                     Icons.delete,
-                                    size: 40,
+                                    size: 25,
                                     color: Colors.black54,
                                   ),
                                 ),
+                                SizedBox(height: 10,),
                                 widget.wishList == false
                                     ? Container(
                                         height: 25,

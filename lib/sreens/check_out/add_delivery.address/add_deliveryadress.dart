@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuyuyuy/sreens/check_out/delivery_details/delivery_details.dart';
 import '../../../providers/check_out_provider.dart';
 import '../../Widget/app_scaffold.dart';
 import '../../Widget/custom_Text_field.dart';
@@ -50,6 +51,11 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
               ? MaterialButton(
                   onPressed: () {
                     checkoutProvider.validator(context, myType);
+                  //   Navigator.of(context)
+                  //     .pushReplacement(MaterialPageRoute(builder: (context) {
+                  //   return AppScaffold(child: DeliveryDetails());
+                  // }));
+
                   },
                   child: Text(
                     'Add Adress',

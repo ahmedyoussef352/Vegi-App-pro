@@ -12,12 +12,13 @@ class ProductOverview extends StatefulWidget {
   final String productName;
   final int productPrice;
   final String productId;
-  var ProductUnit;
+  // var ProductUnit;
   // ignore: non_constant_identifier_names
   final int? ProductQuatity;
   // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
   ProductOverview(
-      {required this.ProductUnit,
+      {
+        // required this.ProductUnit,
       required this.productImage,
       required this.productName,
       required this.productPrice,
@@ -121,7 +122,7 @@ class _ProductOverviewState extends State<ProductOverview> {
               });
               if (WishListBool == true) {
                 wishListProvider.addWishListData(
-                  wishListUnit: widget.ProductUnit,
+                  // wishListUnit: widget.ProductUnit,
                   wishListId: widget.productId,
                   wishListImage: widget.productImage,
                   wishListName: widget.productName,

@@ -32,17 +32,19 @@ class _ProductUnitState extends State<ProductUnit> {
             Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 1),
-                  child: Text(
+                  child: Center(
+                    child: Text(
               widget.title,
               style: TextStyle(fontSize: 13),
             ),
+                  ),
                 )),
             Center(
-              child: Icon(
-                Icons.arrow_drop_down,
-                size: 20,
-                color: Colors.yellow,
-              ),
+              // child: Icon(
+              //   Icons.arrow_drop_down,
+              //   size: 20,
+              //   color: Colors.yellow,
+              // ),
             ),
           ],
         ),

@@ -1,5 +1,4 @@
-// ignore: file_names
-// ignore_for_file: file_names
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:uuyuyuy/sreens/reviewcart/reviewcart.dart';
@@ -23,14 +22,14 @@ class _HomeState extends State<Home> {
   late ProductProvider productProvider;
  late UserProvider userProvider;
 
-  Widget _buildHerbsProduct() {
+  Widget _superMarket() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Herbs Seasonings',
+            'SuberMarket',
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 17,
@@ -42,7 +41,7 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(
                   builder: (context) => 
                   AppScaffold(child: Search(
-                    search: productProvider.getHerbsProductDataList,
+                    search: productProvider.getFreshProductDataList,
                   ),),
                 ),
               );
@@ -60,14 +59,14 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildFreshProduct() {
+  Widget _buildFashonProduct() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Fresh Fruits',
+            'Fashion',
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 17,
@@ -79,7 +78,7 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(
                   builder: (context) => 
                   AppScaffold(child: Search(
-                    search: productProvider.getHerbsProductDataList,
+                    search: productProvider.getfashionProductDataList,
                   ),),
                 ),
               );
@@ -97,14 +96,14 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildRootProduct() {
+  Widget _buildPhonesProduct() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Root',
+            'Phones',
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 17,
@@ -116,7 +115,79 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(
                   builder: (context) => 
                   AppScaffold(child: Search(
-                    search: productProvider.getHerbsProductDataList,
+                    search: productProvider.getPhonesProductDataList,
+                  ),),
+                ),
+              );
+            },
+            child: Text(
+              'Veiw all',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget _buildTabletsProduct() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Tablets',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 17,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => 
+                  AppScaffold(child: Search(
+                    search: productProvider.getTabletsProductDataList,
+                  ),),
+                ),
+              );
+            },
+            child: Text(
+              'Veiw all',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget _buildCosmeticsProduct() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Cosmetics',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 17,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => 
+                  AppScaffold(child: Search(
+                    search: productProvider.getCosmeticsProductDataList,
                   ),),
                 ),
               );
@@ -138,9 +209,11 @@ class _HomeState extends State<Home> {
   void initState() {
     ProductProvider initproductProvider = Provider.of(context, listen: false);
     
-    initproductProvider.fatchHerbsProductData();
+    initproductProvider.fashionProductData();
     initproductProvider.fatchFreshProductData();
-    initproductProvider.fatchRootProductData();
+    initproductProvider.fatchPhonesProductData();
+    initproductProvider.fatchTabletsProductData();
+    initproductProvider.fatchCosmeticsProductData();
     // userProvider = Provider.of(context);
     // userProvider.getUserData();
     super.initState();
@@ -260,38 +333,7 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          _buildHerbsProduct(),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            child: Row(
-              children: productProvider.getHerbsProductDataList.map(
-                (herbsProductData) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => 
-                              AppScaffold(child: ProductOverview(
-                            ProductUnit: herbsProductData.productUnit,
-                                productId: herbsProductData.productId,
-                                productImage: herbsProductData.productImage,
-                                productName: herbsProductData.productName,
-                                productPrice: herbsProductData.productPrice,
-                              )))));
-                    },
-                    child: SingleProduct(
-                      productUnit: herbsProductData,
-                      productImage: herbsProductData.productImage,
-                      productName: herbsProductData.productName,
-                      productPrice: herbsProductData.productPrice,
-                      productId: herbsProductData.productId,
-                    ),
-                  );
-                },
-              ).toList(),
-            ),
-          ),
-          _buildFreshProduct(),
+          _superMarket(),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
@@ -303,7 +345,7 @@ class _HomeState extends State<Home> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => 
                               AppScaffold(child: ProductOverview(
-                               ProductUnit: freshProductData.productUnit,
+                              //  ProductUnit: freshProductData.productUnit,
                                 productImage: freshProductData.productImage,
                                 productName: freshProductData.productName,
                                 productPrice: freshProductData.productPrice,
@@ -316,37 +358,137 @@ class _HomeState extends State<Home> {
                       productName: freshProductData.productName,
                       productPrice: freshProductData.productPrice,
                       productId: freshProductData.productId,
+                      unit: true,
+                      admin: false,
                     ),
                   );
                 },
               ).toList(),
             ),
           ),
-          _buildRootProduct(),
+          _buildFashonProduct(),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             child: Row(
-              children: productProvider.getRootProductDataList.map(
-                (rootProductData) {
+              children: productProvider.getfashionProductDataList.map(
+                (fashionProductData) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => 
+                              AppScaffold(child: ProductOverview(
+                              //  ProductUnit: fashionProductData.productUnit,
+                                productImage: fashionProductData.productImage,
+                                productName: fashionProductData.productName,
+                                productPrice: fashionProductData.productPrice,
+                                productId: fashionProductData.productId,
+                              )))));
+                    },
+                    child: SingleProduct(
+                      productUnit:fashionProductData,
+                      productImage: fashionProductData.productImage,
+                      productName: fashionProductData.productName,
+                      productPrice: fashionProductData.productPrice,
+                      productId: fashionProductData.productId,
+                      admin: false,
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
+          _buildPhonesProduct(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              children: productProvider.getPhonesProductDataList.map(
+                (phonesProductData) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => 
+                              AppScaffold(child: ProductOverview(
+                              //  ProductUnit: phonesProductData.productUnit,
+                                productImage: phonesProductData.productImage,
+                                productName: phonesProductData.productName,
+                                productPrice: phonesProductData.productPrice,
+                                productId: phonesProductData.productId,
+                              )))));
+                    },
+                    child: SingleProduct(
+                      productUnit:phonesProductData,
+                      productImage: phonesProductData.productImage,
+                      productName: phonesProductData.productName,
+                      productPrice: phonesProductData.productPrice,
+                      productId: phonesProductData.productId,
+                      admin: false,
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
+          _buildTabletsProduct(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              children: productProvider.getTabletsProductDataList.map(
+                (tabletsProduct) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => 
+                              AppScaffold(child: ProductOverview(
+                              //  ProductUnit: tabletsProduct.productUnit,
+                                productImage: tabletsProduct.productImage,
+                                productName: tabletsProduct.productName,
+                                productPrice: tabletsProduct.productPrice,
+                                productId: tabletsProduct.productId,
+                              )))));
+                    },
+                    child: SingleProduct(
+                      productUnit:tabletsProduct,
+                      productImage: tabletsProduct.productImage,
+                      productName: tabletsProduct.productName,
+                      productPrice: tabletsProduct.productPrice,
+                      productId: tabletsProduct.productId,
+                      admin: false,
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
+          _buildCosmeticsProduct(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              children: productProvider.getCosmeticsProductDataList.map(
+                (cosmeticsProductData) {
                   return InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) =>
                               AppScaffold(child:  ProductOverview(
-                            ProductUnit: rootProductData.productUnit,
-                                productId: rootProductData.productId,
-                                productImage: rootProductData.productImage,
-                                productName: rootProductData.productName,
-                                productPrice: rootProductData.productPrice,
+                            // ProductUnit: cosmeticsProductData.productUnit,
+                                productId: cosmeticsProductData.productId,
+                                productImage: cosmeticsProductData.productImage,
+                                productName: cosmeticsProductData.productName,
+                                productPrice: cosmeticsProductData.productPrice,
+                                
                               )))));
                     },
                     child: SingleProduct(
-                      productUnit:rootProductData,
-                      productImage: rootProductData.productImage,
-                      productName: rootProductData.productName,
-                      productPrice: rootProductData.productPrice,
-                      productId: rootProductData.productId,
+                      productUnit:cosmeticsProductData,
+                      productImage: cosmeticsProductData.productImage,
+                      productName: cosmeticsProductData.productName,
+                      productPrice: cosmeticsProductData.productPrice,
+                      productId: cosmeticsProductData.productId,
+                      admin: false,
                     ),
                   );
                 },

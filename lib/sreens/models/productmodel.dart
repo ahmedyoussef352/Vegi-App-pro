@@ -4,9 +4,10 @@ class ProductModel {
   final int productPrice;
   final String productId;
    int productQuantity;
-  List<dynamic>productUnit;
+   List<dynamic>?productUnit;
   ProductModel(
-      {required this.productUnit,
+      {
+        // required this.productUnit,
         required this.productQuantity,
         required this.productId,
       required this.productName,

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuyuyuy/sreens/faqs/faqs.dart';
 import '../../providers/user_providers.dart';
 import '../My_profile/My_profile.dart';
 import '../Widget/app_scaffold.dart';
 import '../WishList/WishList.dart';
+import '../notification/notification.dart';
+import '../raiseacomlaint/raisacomplaint.dart';
+import '../rating & review screen/rating & review.dart';
 import '../reviewcart/reviewcart.dart';
 import 'Home.dart';
 
@@ -63,43 +67,52 @@ class _DrawerSideState extends State<DrawerSide> {
           child: ListView(children: [
             Column(
               children: [
-                DrawerHeader(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 43,
-                          backgroundColor: Colors.white54,
-                          child: CircleAvatar(
-                            backgroundColor: Color.fromARGB(255, 237, 204, 71),
-                            backgroundImage: NetworkImage(
-                              "https://s3.envato.com/files/328957910/vegi_thumb.png",
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AppScaffold(child: MyProfile()),
+                      ),
+                    );
+                  },
+                  child: DrawerHeader(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 43,
+                            backgroundColor: Colors.white54,
+                            child: CircleAvatar(
+                              backgroundColor: Color.fromARGB(255, 237, 204, 71),
+                              backgroundImage: NetworkImage(
+                                "https://s3.envato.com/files/328957910/vegi_thumb.png",
+                              ),
+                              radius: 40,
                             ),
-                            radius: 40,
                           ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Ahmed youssef'),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "ay322065.gmail.com",
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                          SizedBox(
+                            width: 20,
                           ),
-                        )
-                      ],
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Ahmed youssef'),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "ay322065.gmail.com",
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -109,7 +122,7 @@ class _DrawerSideState extends State<DrawerSide> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => AppScaffold(child: Home()),
+                        builder: (context) => Home(),
                       ),
                     );
                   },
@@ -134,6 +147,7 @@ class _DrawerSideState extends State<DrawerSide> {
                         builder: (context) =>AppScaffold(child:  MyProfile()),
                       ),
                     );
+                    
                   },
                 ),
                 listTile(
@@ -142,14 +156,20 @@ class _DrawerSideState extends State<DrawerSide> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AppScaffold(child: WishList()),
+                          builder: (context) => AppScaffold(child: Noti()),
                         ),
                       );
                     }),
                 listTile(
                     iconData: Icons.star_outline,
                     title: "Rating & Review",
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AppScaffold(child: RatingReview()),
+                      ),
+                    );
+                    }),
                 listTile(
                     iconData: Icons.favorite_outline,
                     title: "Wishlist",
@@ -166,14 +186,19 @@ class _DrawerSideState extends State<DrawerSide> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AppScaffold(child: WishList()),
+                          builder: (context) => AppScaffold(child: Raise()),
                         ),
                       );
                     }),
                 listTile(
                     iconData: Icons.format_quote_outlined,
                     title: "FAQs",
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AppScaffold(child: FaQs()),
+                        ),
+                      );}),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 70),
                       child: Divider(),

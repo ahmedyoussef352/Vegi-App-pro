@@ -5,7 +5,6 @@ import '../Widget/count.dart';
 import '../Widget/productUnit.dart';
 import '../models/productmodel.dart';
 
-
 class SingleProduct extends StatefulWidget {
   final String productImage;
   final String productName;
@@ -13,6 +12,9 @@ class SingleProduct extends StatefulWidget {
   final String productId;
   final ProductModel productUnit;
   final int? productQuantity;
+  final bool? unit;
+  final bool? admin;
+  Function? onDelete;
 
   // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
   SingleProduct(
@@ -21,27 +23,31 @@ class SingleProduct extends StatefulWidget {
       required this.productId,
       required this.productName,
       required this.productImage,
-      required this.productPrice});
+      required this.productPrice,
+      this.unit,
+      this.admin,
+      this.onDelete});
 
   @override
   State<SingleProduct> createState() => _SingleProductState();
 }
-class _SingleProductState extends State<SingleProduct> { 
+
+class _SingleProductState extends State<SingleProduct> {
   // ignore: non_constant_identifier_names
   var UnitData;
   var firstValue;
   @override
   @override
   Widget build(BuildContext context) {
-      //   reviewCartProvider = Provider.of<ReviewCartModel>(context) as ReviewCartProvider;
-      //  List data = reviewCartProvider.reviewCartDataList;
+    //   reviewCartProvider = Provider.of<ReviewCartModel>(context) as ReviewCartProvider;
+    //  List data = reviewCartProvider.reviewCartDataList;
 
-    widget.productUnit.productUnit.firstWhere((element) {
-      setState(() {
-        firstValue = element;
-      });
-      return true;
-    });
+    // widget.productUnit.productUnit.firstWhere((element) {
+    //   setState(() {
+    //     firstValue = element;
+    //   });
+    //   return true;
+    // });
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
@@ -76,106 +82,96 @@ class _SingleProductState extends State<SingleProduct> {
                           children: [
                             Text(
                               widget.productName.toString(),
+                              maxLines: 1,
                               style: TextStyle(
                                   fontSize: 19, fontWeight: FontWeight.w700),
                             ),
-                            Text(
-                              "${widget.productPrice}\$/${UnitData ?? firstValue}",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
+                            widget.unit == true
+                                ? Text(
+                                    "${widget.productPrice}\$/500 Gram",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.grey),
+                                  )
+                                : Text(
+                                    "${widget.productPrice}\$/Piece",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.grey),
+                                  ),
                             SizedBox(
                               height: 1,
                             ),
                             Expanded(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    // ignore: sized_box_for_whitespace
+                              child: widget.admin == false
+                                  ? Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          // ignore: sized_box_for_whitespace
+                                          child: widget.unit == true
+                                              ? Container(
+                                                  width: 120,
+                                                  height: 30,
+                                                  child: ProductUnit(
+                                                    onTap: () {},
+                                                    title:
+                                                        '500 Gram',
+                                                  ),
+                                                )
+                                              : Container(
+                                                  width: 120,
+                                                  height: 30,
+                                                  child: ProductUnit(
+                                                    onTap: () {},
+                                                    title: 'Piece',
+                                                  ),
+                                                ),
+                                        ),
+                                        SizedBox(
+                                          width: 6,
+                                        ),
+                                        Expanded(
+                                          child: Count(
+                                            productId: widget.productId,
+                                            productImage: widget.productImage,
+                                            productName: widget.productName,
+                                            productPrice: widget.productPrice,
+                                            productUnit: UnitData ?? firstValue,
+                                            // productQuantity: data.first.cartQuantity,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : InkWell(
+                                    onDoubleTap: () {
+                                      setState(widget.onDelete!());  
+                                    },
                                     child: Container(
-                                      width: 120,
-                                      height: 30,
-                                      child: ProductUnit(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                              context: context,
-                                              builder: (context) {
-                                                return Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: widget
-                                                      .productUnit.productUnit
-                                                      .map<Widget>((data) {
-                                                    return Column(
-                                                      children: [
-                                                        InkWell(
-                                                          
-                                                          onTap: () async {
-                                                            setState(() {
-                                                              UnitData = data;
-                                                            });
-                                                            Navigator.of(context)
-                                                                .pop();
-                                                          },
-                                                          // ignore: sized_box_for_whitespace
-                                                          child: Container(
-                                                            width: double.infinity,
-                                                            child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: [
-                                                                SizedBox(height: 5),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .only(
-                                                                          top: 20,
-                                                                          bottom:
-                                                                              15,
-                                                                          left: 10),
-                                                                  child: Text(
-                                                                    data,
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              245,
-                                                                              206,
-                                                                              50),
-                                                                      fontSize: 18,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    );
-                                                  }).toList(),
-                                                );
-                                              });
-                                        },
-                                        title: UnitData ?? firstValue,
+                                        padding: EdgeInsets.symmetric(horizontal: 5,),
+                                         margin: EdgeInsets.symmetric(
+                                          horizontal: 5,
+                                         ),
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius: BorderRadius.circular(50),
+                                        ),
+                                        child: TextButton(
+                                            // splashColor: Colors.black,
+                                            // color: Colors.orange,
+                                            onPressed: () {},
+                                            child: Expanded(
+                                              child: Text(
+                                                'Delete',
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )),
                                       ),
-                                    ),
                                   ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
-                                   Count(
-                                    productId: widget.productId,
-                                    productImage: widget.productImage,
-                                    productName: widget.productName,
-                                    productPrice: widget.productPrice,
-                                    productUnit: UnitData ?? firstValue,
-                                          // productQuantity: data.first.cartQuantity,
-                                  ),
-        
-                                ],
-                              ),
                             ),
                           ],
                         )),

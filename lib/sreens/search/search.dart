@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../Widget/app_scaffold.dart';
 import '../Widget/singleitem.dart';
 import '../models/productmodel.dart';
+import '../product_overview/product_overview.dart';
+import 'filter/Tablets.dart';
 class Search extends StatefulWidget {
   final List<ProductModel>search;
   const Search ({ required this.search});
@@ -86,18 +89,79 @@ class _SearchState extends State<Search> {
                 ),
               ),
             ),
+            // SizedBox(height: 10,),
+            // Container(
+            //     height: 40,
+            //         child: TabBar(
+            //       indicatorColor: Color.fromARGB(255, 195, 160, 4),
+            //       labelColor: Color.fromARGB(255, 195, 160, 4),
+            //       unselectedLabelColor: Colors.grey,
+            //       tabs: const [
+            //         Tab(
+            //           text: 'SuperMarket',
+            //         ),
+            //         Tab(
+            //           text: 'Fashon',
+            //         ),
+            //         Tab(
+            //           text: 'Phones',
+            //         ),
+            //         Tab(
+            //           text: 'Tablets',
+            //         ),
+            //         Tab(
+            //           text: 'Cosmetics',
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+              // const Expanded(
+              //     child: TabBarView(
+              //   children: [
+              //     Center(
+              //       child: TabletsFilter(),
+              //     ),
+              //     Center(
+              //       child: TabletsFilter(),
+              //     ),
+              //     Center(
+              //       child: TabletsFilter(),
+              //     ),
+              //     Center(
+              //       child: TabletsFilter(),
+              //     ),
+              //     Center(
+              //       child: TabletsFilter(),
+              //     ),
+              //   ],)),
             SizedBox(height: 20,),
             Column(
             children: _searchItem.map((data) {
-              return SingleItem(
-                // isBool: false,
-                productImage: data.productImage,
-                productName: data.productName,
-                productPrice: data.productPrice,
-                 productUnit: data.productUnit,
-                 productId: data.productId,
-                 productQuantity: data.productQuantity,
-                 
+              return InkWell(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) =>
+                              AppScaffold(child:  ProductOverview(
+                            // ProductUnit: cosmeticsProductData.productUnit,
+                                productId: data.productId,
+                                productImage: data.productImage,
+                                productName: data.productName,
+                                productPrice: data.productPrice,
+                                
+                              )))));
+                },
+                child: SingleItem(
+                   isBool: true,
+                  productImage: data.productImage,
+                  productName: data.productName,
+                  productPrice: data.productPrice,
+                   productUnit: data.productUnit,
+                   productId: data.productId,
+                   productQuantity: data.productQuantity,
+                   wishList: false,
+                   search: true,
+                   
+                ),
               );
             }).toList(),
           )
